@@ -30,6 +30,30 @@ h2, h3 {
     background-color: #ffebcd;
     padding: 10px 10px;
     border-bottom: 2px solid #ffdaa4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Espacement entre l'input et le bouton */
+}
+
+#searchButton {
+    background-color: #FFC107; /* Jaune primaire pour le fond du bouton */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#searchButton:hover {
+    background-color: #FFD54F; /* Une nuance de jaune plus claire pour le survol */
+}
+
+#searchButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.5); /* Ombre en nuance de jaune pour le focus */
 }
 
 #searchInput {
