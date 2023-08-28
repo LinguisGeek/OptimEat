@@ -4,13 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById('searchInput').addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
-            let term = this.value.trim().toLowerCase();
-            if (term && !searchTerms.includes(term)) {
-                searchTerms.push(term);
-                addIngredient(term);
-                this.value = '';
-                refreshDisplay();
-            }
+            handleUserInput();
         }
     });
 
@@ -131,14 +125,39 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-document.getElementById('downloadBtn').addEventListener('click', function() {
-    html2canvas(document.getElementById('modalContent')).then(function(canvas) {
-        let link = document.createElement('a');
-        link.href = canvas.toDataURL();
-        link.download = 'liste_de_course.png';
-        link.click();
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        html2canvas(document.getElementById('modalContent')).then(function(canvas) {
+            let link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'liste_de_course.png';
+            link.click();
+        });
     });
-});
+
+    document.querySelector('#searchButton').addEventListener('click', function() {
+        handleUserInput();
+    });
+
+    function handleUserInput() {
+        var userInput = document.querySelector('#searchInput').value.trim();
+
+        if (userInput) { 
+            var ingredients = userInput.split(/[\s,]+/).filter(Boolean); 
+
+            ingredients.forEach(function(ingredient) {
+                ingredient = ingredient.toLowerCase().trim();
+                if (!searchTerms.includes(ingredient)) {
+                    searchTerms.push(ingredient);
+                    addIngredient(ingredient);
+                    refreshDisplay();
+                }
+            });
+            document.querySelector('#searchInput').value = '';  // Clear input after processing
+
+        } else {
+            alert("Veuillez entrer au moins un ingrédient.");
+        }
+    }
 
     fetchSheetData();
 });
