@@ -292,51 +292,52 @@ table tr:first-child {
     }
 
     #savedIngredients li {
-        padding: 5px 10px;
-        font-size: 14px;
+        padding: 15px 25px; /* Augmentation du padding pour une meilleure lisibilité */
+        font-size: 22px;   /* Augmentation de la taille de la police pour un meilleur affichage */
     }
 
     #savedIngredients li span {
-        padding: 2px 6px;
-        font-size: 8px;
-        margin-left: 5px;
+        padding: 8px 16px; /* Augmentation du padding pour une meilleure visibilité */
+        font-size: 14px;   /* Augmentation de la taille de la police pour un meilleur affichage */
+        margin-left: 10px;
     }
 
     table {
         margin: 10px 0;
-        font-size: 14px;
+        font-size: 16px;  /* Augmentation de la taille de la police pour une meilleure visibilité */
     }
 
     th, td {
-        padding: 8px;
+        padding: 10px;    /* Augmentation du padding pour une meilleure séparation des éléments */
     }
 
     .table-container {
         margin: 10px auto;
-        padding: 10px;
+        padding: 15px;    /* Augmentation du padding pour un meilleur affichage */
         border: 3px solid #FFC107;
     }
 
     .modal-content {
         margin: 5% auto;
-        padding: 10px;
-        width: 90%;
+        padding: 20px;    /* Augmentation du padding pour un meilleur affichage */
+        width: 95%;
         min-width: 200px; 
-        min-height: 200px;
+        min-height: 80vh;
     }
 
     .close {
         right: 5px;
-        font-size: 24px;
+        font-size: 36px;  /* Augmentation de la taille pour une meilleure visibilité */
+        top: 5px;
     }
 
     #modalText h1 {
-        font-size: 20px;
+        font-size: 22px;  /* Augmentation de la taille de la police pour un meilleur affichage */
         margin-bottom: 10px;
     }
 
     #modalText ul li {
-        font-size: 16px;
+        font-size: 18px;  /* Augmentation de la taille de la police pour une meilleure visibilité */
     }
 
     .modal-details {
@@ -357,6 +358,8 @@ table tr:first-child {
         position: static; /* désactive le positionnement absolu */
         display: block;
         margin: 20px auto 0; /* centre le bouton et ajoute une marge en haut */
+        padding: 18px 28px;  /* Augmentation du padding pour un bouton plus grand */
+        font-size: 18px;     /* Augmentation de la taille de la police pour un texte plus visible */
     }
 }
 
