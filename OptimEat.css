@@ -265,3 +265,98 @@ table tr:first-child {
     padding: 10px 20px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 767px) {
+    h1 {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    h2, h3 {
+        padding-left: 10px;
+        font-size: 18px;
+    }
+
+    .search-bar-container {
+        padding: 5px 5px;
+    }
+
+    #searchInput {
+        padding: 8px;
+        width: 95%;
+    }
+
+    #savedIngredients {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    #savedIngredients li {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    #savedIngredients li span {
+        padding: 2px 6px;
+        font-size: 8px;
+        margin-left: 5px;
+    }
+
+    table {
+        margin: 10px 0;
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .table-container {
+        margin: 10px auto;
+        padding: 10px;
+        border: 3px solid #FFC107;
+    }
+
+    .modal-content {
+        margin: 5% auto;
+        padding: 10px;
+        width: 90%;
+        min-width: 200px; 
+        min-height: 200px;
+    }
+
+    .close {
+        right: 5px;
+        font-size: 24px;
+    }
+
+    #modalText h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    #modalText ul li {
+        font-size: 16px;
+    }
+
+    .modal-details {
+        flex-direction: column; /* change l'orientation des éléments de la modal */
+    }
+
+    .ingredients-list {
+        margin-right: 0; /* retire la marge à droite pour les mobiles */
+        columns: 1; /* affiche en une seule colonne pour les mobiles */
+        max-height: none;
+    }
+
+    .source-details {
+        margin-top: 20px; /* ajoute une marge en haut pour les mobiles */
+    }
+
+    .download-button {
+        position: static; /* désactive le positionnement absolu */
+        display: block;
+        margin: 20px auto 0; /* centre le bouton et ajoute une marge en haut */
+    }
+}
+
