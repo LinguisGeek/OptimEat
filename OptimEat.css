@@ -172,8 +172,13 @@ tr:nth-child(even) {
     background-color: #fff;
     margin: 10% auto;
     padding: 20px;
+    border: 1px solid #ccc;
     width: 60%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-height: 600px
+    min-width: 300px;
+    min-height: 300px;
+    overflow-y: auto; /* Pour permettre le défilement si le contenu dépasse */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     border-radius: 8px;
     position: relative; /* Ajout de cette ligne */
 }
@@ -229,4 +234,34 @@ tr:nth-child(even) {
 }
 table tr:first-child {
     cursor: default !important;
+}
+
+.modal-details {
+    display: flex;
+    justify-content: space-between;  /* Sépare les deux éléments enfants */
+    align-items: flex-start;         /* Aligne les éléments enfants en haut */
+}
+
+.ingredients-list {
+    flex: 1;   /* Prend tout l'espace disponible, permettant à la liste des ingrédients de s'étendre autant que possible */
+    margin-right: 20px;  /* Ajoute une marge entre la liste des ingrédients et les détails de la source */
+    margin-bottom: 8px;
+    columns: 2; /* Divise la liste en 2 colonnes */
+    column-gap: 20px; /* Espacement entre les colonnes */
+    max-height: 400px; /* Hauteur maximale avant de diviser en colonnes */
+}
+
+.source-details {
+    flex-basis: 200px; /* Ceci donne une largeur fixe à la section des détails de la source. Vous pouvez ajuster cette valeur selon vos besoins. */
+}
+
+.download-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
