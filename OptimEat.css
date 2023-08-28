@@ -20,7 +20,7 @@ h1 {
 }
 
 h2, h3 {
-    padding-left: 20px;  /* Ajustez cette valeur selon l'espace souhaité */
+    padding-left: 20px;
 }
 
 .search-bar-container {
@@ -41,9 +41,9 @@ h2, h3 {
     outline: none;
     transition: box-shadow 0.3s;
 
-    display: block;        /* Changement à block */
-    margin-left: auto;     /* Centrage horizontal */
-    margin-right: auto;    /* Centrage horizontal */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #searchInput:focus {
@@ -88,7 +88,7 @@ h2, h3 {
     color: white;
     margin-left: 10px;
     transition: background-color 0.3s;
-    font-size: 10px;  /* Ajoutez ou ajustez cette ligne pour modifier la taille */
+    font-size: 10px;
 }
 
 #savedIngredients li span:hover {
@@ -123,17 +123,16 @@ th {
 tr:nth-child(even) {
     background-color: #fff7d1;
 }
-/* Container du tableau */
+
 .table-container {
     margin: 20px auto;
     padding: 20px;
     max-width: 90%;
-    border: 5px solid #FFC107; /* Couleur de liseré jaune */
+    border: 5px solid #FFC107;
     position: relative;
-    background-color: white; /* Pour contraster avec le fond */
+    background-color: white;
 }
 
-/* Effets de liseré stylisés */
 .table-container::before,
 .table-container::after {
     content: '';
@@ -153,5 +152,81 @@ tr:nth-child(even) {
 }
 
 #sheetTable {
-    width: 100%;  /* Prendre toute la largeur du conteneur */
+    width: 100%;
+}
+
+/* Popin globale */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+}
+
+/* Contenu de la popin */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 60%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    position: relative; /* Ajout de cette ligne */
+}
+
+/* Bouton de fermeture */
+.close {
+    color: #aaa;
+    position: absolute; /* Ajout de cette ligne */
+    top: 0px; /* Ajout de cette ligne */
+    right: 10px; /* Ajout de cette ligne */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    float: none; /* Remplacez 'float: right;' par cette ligne pour annuler le flottement */
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Titre de la recette */
+#modalText h1 {
+    font-size: 24px;
+    color: #fffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ffcc00;
+}
+
+/* Liste des ingrédients */
+#modalText ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#modalText ul li {
+    padding: 5px 0;
+    font-size: 18px;
+}
+
+#modalText ul li:before {
+    content: "• ";
+    color: #ffcc00;
+}
+
+.shadow-effect:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Ceci ajoute l'effet d'ombre */
+    border: 2px solid #ffc107; /* Ceci ajoute le liseré jaune autour */
+    transition: box-shadow 0.3s, border 0.3s; /* Ajoute une transition pour un effet en douceur */
+}
+table tr:first-child {
+    cursor: default !important;
 }
