@@ -1,3 +1,4 @@
+ document.addEventListener("DOMContentLoaded", function() {
   let allData = [];
 let searchTerms = [];  // Ceci est le tableau manquant
 
@@ -76,14 +77,42 @@ function displaySheetData(data) {
         return cellText;
     }
 
-    data.forEach((row, rowIndex) => {
-        const tr = document.createElement('tr');
-        row.forEach(cell => {
-            const td = document.createElement(rowIndex === 0 ? 'th' : 'td');
-            td.innerHTML = highlightSearchTerms(cell); // Utilisez innerHTML ici pour inclure les balises HTML
-            tr.appendChild(td);
-        });
-        table.appendChild(tr);
+data.forEach((row, rowIndex) => {
+    const tr = document.createElement('tr');
+
+    if(rowIndex !== 0) {
+        tr.style.cursor = "pointer";
+        tr.classList.add('shadow-effect');
+        
+        tr.onclick = function() {
+            const recipeName = row[0];
+            const ingredients = row.slice(1).join(', ');
+            document.getElementById('modalText').innerHTML = `<h1>${recipeName}</h1><ul><li>${ingredients.replace(/, /g, '</li><li>')}</li></ul>`;
+            modal.style.display = "block";
+        };
+    }
+
+    row.forEach(cell => {
+        const td = document.createElement(rowIndex === 0 ? 'th' : 'td');
+        td.innerHTML = highlightSearchTerms(cell);
+        tr.appendChild(td);
     });
+
+    table.appendChild(tr);
+});
+
+}
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
         fetchSheetData();
+});
