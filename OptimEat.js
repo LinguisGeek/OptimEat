@@ -257,7 +257,7 @@ function supprimerRecette(docId, trElement) {
     db.collection('recipes').doc(docId).delete().then(() => {
         console.log("Recette supprimée avec succès !");
         // Supprimez la ligne du tableau
-        trElement.remove(); 
+        trElement.parentElement.parentElement.remove(); 
     }).catch((error) => {
         console.error("Erreur lors de la suppression de la recette: ", error);
     });
