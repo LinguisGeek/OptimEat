@@ -119,12 +119,21 @@ h2, h3 {
     background-color: #ffab00;
 }
 
-.highlighted {
-    background-color: yellow;
-    padding: 0 5px;
-    margin: 0 -5px;
-    font-weight: bold;
+.highlighted-ingredient {
+    background-color: #1E90FF; /* Bleu électrique */
+    color: #FFFFFF; /* Texte blanc pour le contraste */
+    padding: 2px 5px; /* Un peu d'espacement autour du texte */
+    border-radius: 3px; /* Coins arrondis pour un look moderne */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Une légère ombre pour donner de la profondeur */
+    font-weight: bold; /* Texte en gras pour plus d'impact */
+    transition: background-color 0.3s ease; /* Transition douce lors des changements de couleur */
 }
+
+/* Pour un effet interactif, changeons la couleur de fond lors du survol */
+.highlighted:hover {
+    background-color: #3DA5FF; /* Une teinte légèrement plus claire de bleu lors du survol */
+}
+
 
 table {
     width: 100%;
@@ -180,91 +189,65 @@ tr:nth-child(even) {
 }
 
 /* Popin globale */
-.modal {
+#rowModal {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-    z-index: 1000;
+    position: fixed; /* Position fixe par rapport à la fenêtre */
+    top: 50%; /* Centrage vertical */
+    left: 50%; /* Centrage horizontal */
+    transform: translate(-50%, -50%); /* Ajustement pour un centrage parfait */
+    z-index: 1000; /* S'assurer qu'elle apparaît au-dessus des autres éléments */
+    width: 80%; /* Largeur de la modale, à ajuster selon vos besoins */
+    max-width: 500px; /* Largeur maximale pour les grands écrans */
+    padding: 20px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet "flottant" */
 }
 
-/* Contenu de la popin */
 .modal-content {
-    background-color: #fff;
+    background-color: #1a1a1a;
     margin: 10% auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    width: 60%;
-    max-height: 600px
-    min-width: 300px;
-    min-height: 300px;
-    overflow-y: auto; /* Pour permettre le défilement si le contenu dépasse */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    position: relative; /* Ajout de cette ligne */
+    border: 1px solid #888;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Bouton de fermeture */
-.close {
-    color: #aaa;
-    position: absolute; /* Ajout de cette ligne */
-    top: 0px; /* Ajout de cette ligne */
-    right: 10px; /* Ajout de cette ligne */
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    float: none; /* Remplacez 'float: right;' par cette ligne pour annuler le flottement */
-}
-
-.close:hover, .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Titre de la recette */
-#modalText h1 {
-    font-size: 24px;
-    color: #fffff;
-    text-transform: uppercase;
-    font-weight: bold;
+.modal-content h2 {
+    color: #f7c744;
+    border-bottom: 2px solid #f7c744;
+    padding-bottom: 10px;
     margin-bottom: 20px;
-    border-bottom: 2px solid #ffcc00;
 }
 
-/* Liste des ingrédients */
-#modalText ul {
+.modal-content ul {
     list-style-type: none;
     padding: 0;
 }
 
-#modalText ul li {
-    padding: 5px 0;
+.modal-content ul li {
     font-size: 18px;
+    color: #f7f7f7;
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
 }
 
-#modalText ul li:before {
-    content: "• ";
-    color: #ffcc00;
+.close {
+    color: #f7c744;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: -20px;
+    margin-right: -10px;
 }
 
-.shadow-effect:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Ceci ajoute l'effet d'ombre */
-    border: 2px solid #ffc107; /* Ceci ajoute le liseré jaune autour */
-    transition: box-shadow 0.3s, border 0.3s; /* Ajoute une transition pour un effet en douceur */
-}
-table tr:first-child {
-    cursor: default !important;
+.close:hover,
+.close:focus {
+    color: #f7f7f7;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.modal-details {
-    display: flex;
-    justify-content: space-between;  /* Sépare les deux éléments enfants */
-    align-items: flex-start;         /* Aligne les éléments enfants en haut */
-}
 
 .ingredients-list {
     flex: 1;   /* Prend tout l'espace disponible, permettant à la liste des ingrédients de s'étendre autant que possible */
@@ -290,100 +273,254 @@ table tr:first-child {
     cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
+
+/* Bouton de déconnexion */
+#logoutButton {
+    background-color: #FF4D4D; /* Couleur de fond rouge pour indiquer une action de déconnexion */
+    border: none;
+    color: white; /* Texte blanc */
+    padding: 10px 20px; /* Espacement interne pour le bouton */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    float: right;
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet 3D */
+    transition: transform 0.2s, background-color 0.2s; /* Animation douce lors de l'interaction */
+}
+
+/* Effet lorsque le bouton est survolé */
+#logoutButton:hover {
+    background-color: #FF2D2D; /* Une teinte légèrement plus foncée lors du survol */
+    transform: scale(1.05); /* Légère augmentation de la taille pour un effet interactif */
+}
+
+/* Effet lorsque le bouton est pressé */
+#logoutButton:active {
+    background-color: #FF0000; /* Une teinte encore plus foncée lorsqu'il est pressé */
+    transform: scale(1); /* Retour à la taille normale */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Réduction de l'ombre pour un effet d'enfoncement */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fffbea;
+    margin: 0;
+    padding: 0;
+}
+
+.recipe-modal-container {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 101;
+}
+
+.recipe-modal-content {
+    background-color: #ffebcd;
+    margin: 15% auto;
+    padding: 20px;
+    border: 2px solid #ffdaa4;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.recipe-close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #FFC107;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.recipe-close-btn:hover,
+.recipe-close-btn:focus {
+    color: white;
+    background-color: #ffab00;
+}
+
+.recipe-title {
+    background-color: #4CAF50;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #FFC107;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background-color: #ffab00;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#cancelDelete {
+    background-color: #FF4D4D;
+    color: white;
+    /* ... autres propriétés ... */
+}
+
+#cancelDelete:hover {
+    background-color: #e43f3f;  /* Une teinte légèrement plus sombre pour l'effet de survol */
+}
+
+#confirmDelete {
+    background-color: #4CAF50;
+    color: white;
+    /* ... autres propriétés ... */
+}
+
+#confirmDelete:hover {
+    background-color: #45a049;  /* Une teinte légèrement plus sombre pour l'effet de survol */
+}
+
+/* Styles spécifiques pour les appareils Android */
+.android-device {
+    font-size: 18px; /* Augmentation de la taille de police de base */
+
     h1 {
-        padding: 10px;
-        font-size: 20px;
+        font-size: 28px;
+        padding: 15px 10px;
     }
 
     h2, h3 {
-        padding-left: 10px;
-        font-size: 18px;
+        font-size: 24px;
+        padding: 10px;
     }
 
     .search-bar-container {
-        padding: 5px 5px;
+        flex-direction: column;
+        gap: 10px;
     }
 
     #searchInput {
-        padding: 8px;
-        width: 95%;
+        width: 100%;
+        margin: 0;
+        padding: 10px; /* Augmentation du padding pour un meilleur toucher */
+        font-size: 20px; /* Augmentation de la taille de police */
+    }
+
+    #searchButton {
+        padding: 10px 20px; /* Augmentation du padding pour un meilleur toucher */
+        font-size: 20px; /* Augmentation de la taille de police */
     }
 
     #savedIngredients {
-        padding: 10px;
-        margin: 10px;
-    }
-
-    #savedIngredients li {
-        padding: 15px 25px; /* Augmentation du padding pour une meilleure lisibilité */
-        font-size: 22px;   /* Augmentation de la taille de la police pour un meilleur affichage */
-    }
-
-    #savedIngredients li span {
-        padding: 8px 16px; /* Augmentation du padding pour une meilleure visibilité */
-        font-size: 14px;   /* Augmentation de la taille de la police pour un meilleur affichage */
-        margin-left: 10px;
-    }
-
-    table {
-        margin: 10px 0;
-        font-size: 16px;  /* Augmentation de la taille de la police pour une meilleure visibilité */
-    }
-
-    th, td {
-        padding: 10px;    /* Augmentation du padding pour une meilleure séparation des éléments */
+        margin: 15px;
+        font-size: 20px; /* Augmentation de la taille de police */
     }
 
     .table-container {
-        margin: 10px auto;
-        padding: 15px;    /* Augmentation du padding pour un meilleur affichage */
-        border: 3px solid #FFC107;
-    }
-
-    .modal-content {
-        margin: 5% auto;
-        padding: 20px;    /* Augmentation du padding pour un meilleur affichage */
-        width: 95%;
-        min-width: 200px; 
-        min-height: 80vh;
-    }
-
-    .close {
-        right: 5px;
-        font-size: 36px;  /* Augmentation de la taille pour une meilleure visibilité */
-        top: 5px;
-    }
-
-    #modalText h1 {
-        font-size: 22px;  /* Augmentation de la taille de la police pour un meilleur affichage */
-        margin-bottom: 10px;
-    }
-
-    #modalText ul li {
-        font-size: 18px;  /* Augmentation de la taille de la police pour une meilleure visibilité */
-    }
-
-    .modal-details {
-        flex-direction: column; /* change l'orientation des éléments de la modal */
+        max-width: 100%;
+        padding: 15px;
     }
 
     .ingredients-list {
-        margin-right: 0; /* retire la marge à droite pour les mobiles */
-        columns: 1; /* affiche en une seule colonne pour les mobiles */
-        max-height: none;
+        columns: 1;
+        font-size: 20px; /* Augmentation de la taille de police */
     }
 
-    .source-details {
-        margin-top: 20px; /* ajoute une marge en haut pour les mobiles */
+    .recipe-modal-content {
+        width: 90%;
     }
 
-    .download-button {
-        position: static; /* désactive le positionnement absolu */
-        display: block;
-        margin: 20px auto 0; /* centre le bouton et ajoute une marge en haut */
-        padding: 18px 28px;  /* Augmentation du padding pour un bouton plus grand */
-        font-size: 18px;     /* Augmentation de la taille de la police pour un texte plus visible */
+    form input[type="text"] {
+        margin-bottom: 15px;
+        padding: 10px; /* Augmentation du padding pour un meilleur toucher */
+        font-size: 20px; /* Augmentation de la taille de police */
     }
+}
+
+.highlighted-ingredient {
+    background-color: yellow;
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 

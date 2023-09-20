@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" href="favicon.io/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Optim'Eat</title>
+   <style>
+      body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fffbea;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    background-color: #ffc107;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    border-bottom: 5px solid #ffab00;
+}
+
+h2, h3 {
+    padding-left: 20px;  /* Ajustez cette valeur selon l'espace souhaité */
+}
+
+.search-bar-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #ffebcd;
+    padding: 10px 10px;
+    border-bottom: 2px solid #ffdaa4;
+}
+
+#searchInput {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 90%;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    outline: none;
+    transition: box-shadow 0.3s;
+
+    display: block;        /* Changement à block */
+    margin-left: auto;     /* Centrage horizontal */
+    margin-right: auto;    /* Centrage horizontal */
+}
+
+#searchInput:focus {
+    box-shadow: 0px 4px 15px rgba(255,193,7,0.3);
+}
+
+#savedIngredients {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: #ffebcd;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+#savedIngredients li {
+    padding: 10px 20px;
+    border: 2px solid #ffc107;
+    border-radius: 20px;
+    background-color: white;
+    color: #ffc107;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+#savedIngredients li:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+#savedIngredients li span {
+    background-color: #ffc107;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+    font-size: 10px;  /* Ajoutez ou ajustez cette ligne pour modifier la taille */
+}
+
+#savedIngredients li span:hover {
+    background-color: #ffab00;
+}
+
+.highlighted {
+    background-color: yellow;
+    padding: 0 5px;
+    margin: 0 -5px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ffd27f;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #ffc107;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #fff7d1;
+}
+/* Container du tableau */
+.table-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 90%;
+    border: 5px solid #FFC107; /* Couleur de liseré jaune */
+    position: relative;
+    background-color: white; /* Pour contraster avec le fond */
+}
+
+/* Effets de liseré stylisés */
+.table-container::before,
+.table-container::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 15%;
+    height: 5px;
+    background: linear-gradient(to left, #FFC107, transparent);
+    top: 10px;
+}
+
+.table-container::after {
+    background: linear-gradient(to right, #FFC107, transparent);
+    top: auto;
+    bottom: 10px;
+    right: 0;
+}
+
+#sheetTable {
+    width: 100%;  /* Prendre toute la largeur du conteneur */
+}
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Optim'Eat</h1>
+    </div>
+    <h2>Mes Ingrédients:</h2>
+    <div class="search-bar-container">
+        <input type="text" id="searchInput" placeholder="Qu'as tu dans le frigo?">
+    </div>
+    <ul id="savedIngredients"></ul>
+    <h3>Mes Recettes:</h3>
+<div class="table-container">
+    <table id="sheetTable"></table>
+</div>
+
+    <script>
+        let allData = [];
+let searchTerms = [];  // Ceci est le tableau manquant
+
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        let term = this.value.trim().toLowerCase();
+        if (term && !searchTerms.includes(term)) {
+            searchTerms.push(term);
+            addIngredient(term);
+            this.value = '';
+            refreshDisplay();  // Rafraîchir l'affichage après l'ajout d'un ingrédient
+        }
+    }
+});
+
+document.getElementById('searchInput').addEventListener('input', function() {
+    refreshDisplay();
+});
+
+function addIngredient(ingredient) {
+    let ul = document.getElementById('savedIngredients');
+    let li = document.createElement('li');
+    li.textContent = ingredient;
+
+    let removeBtn = document.createElement('span');
+    removeBtn.textContent = 'x';
+    removeBtn.addEventListener('click', function() {
+        let index = searchTerms.indexOf(ingredient);
+        if (index > -1) {
+            searchTerms.splice(index, 1);  // Supprimer l'ingrédient du tableau de termes
+        }
+        ul.removeChild(li);
+        refreshDisplay();  // Rafraîchir l'affichage après la suppression d'un ingrédient
+    });
+
+    li.appendChild(removeBtn);
+    ul.appendChild(li);
+}
+
+function refreshDisplay() {
+    let filteredData = [allData[0]].concat(allData.slice(1).filter(row => {
+        return searchTerms.every(term => 
+            row.some(cell => cell.toLowerCase().includes(term))
+        );
+    }));
+    displaySheetData(filteredData);
+}
+
+function fetchSheetData() {
+    const sheetId = '1bNnlMbWRiIg1FquOSsb_zQf_5sHz3-PC9z12rUManXQ';
+    const apiKey = 'AIzaSyBDzRAtHIvBfMd3wOEDR09UHbsQeEFJrqg';
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet2?key=${apiKey}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            allData = data.values;
+            displaySheetData(allData);
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération des données :", error);
+        });
+}
+
+function displaySheetData(data) {
+    const table = document.getElementById('sheetTable');
+    table.innerHTML = '';
+
+    data = data.filter(row => row.some(cell => cell && cell.trim())); // Filtrer les lignes vides
+
+    const highlightSearchTerms = (cellText) => {
+        searchTerms.forEach(term => {
+            const regex = new RegExp(`(${term})`, 'ig');
+            cellText = cellText.replace(regex, '<span class="highlighted">$1</span>');
+        });
+        return cellText;
+    }
+
+    data.forEach((row, rowIndex) => {
+        const tr = document.createElement('tr');
+        row.forEach(cell => {
+            const td = document.createElement(rowIndex === 0 ? 'th' : 'td');
+            td.innerHTML = highlightSearchTerms(cell); // Utilisez innerHTML ici pour inclure les balises HTML
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
+    });
+}
+        fetchSheetData();
+    </script>
+</body>
+
+</html>
