@@ -188,65 +188,6 @@ tr:nth-child(even) {
     width: 100%;
 }
 
-/* Popin globale */
-#rowModal {
-    display: none;
-    position: fixed; /* Position fixe par rapport à la fenêtre */
-    top: 50%; /* Centrage vertical */
-    left: 50%; /* Centrage horizontal */
-    transform: translate(-50%, -50%); /* Ajustement pour un centrage parfait */
-    z-index: 1000; /* S'assurer qu'elle apparaît au-dessus des autres éléments */
-    width: 80%; /* Largeur de la modale, à ajuster selon vos besoins */
-    max-width: 500px; /* Largeur maximale pour les grands écrans */
-    padding: 20px;
-    border-radius: 10px; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet "flottant" */
-}
-
-.modal-content {
-    background-color: #1a1a1a;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content h2 {
-    color: #f7c744;
-    border-bottom: 2px solid #f7c744;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-.modal-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.modal-content ul li {
-    font-size: 18px;
-    color: #f7f7f7;
-    padding: 5px 0;
-    border-bottom: 1px solid #333;
-}
-
-.close {
-    color: #f7c744;
-    float: right;
-    font-size: 30px;
-    font-weight: bold;
-    margin-top: -20px;
-    margin-right: -10px;
-}
-
-.close:hover,
-.close:focus {
-    color: #f7f7f7;
-    text-decoration: none;
-    cursor: pointer;
-}
 
 
 .ingredients-list {
@@ -406,7 +347,7 @@ form input[type="submit"]:hover {
     background-color: darkred;
 }
 
-.modal {
+.modal-delete {
     display: none; 
     position: fixed;
     left: 0;
@@ -418,7 +359,7 @@ form input[type="submit"]:hover {
     background-color: rgba(0,0,0,0.4);
 }
 
-.modal-content {
+.modal-delete-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
@@ -508,7 +449,7 @@ form input[type="submit"]:hover {
     }
 
     .recipe-modal-content {
-        width: 90%;
+        width: 0%;
     }
 
     form input[type="text"] {
