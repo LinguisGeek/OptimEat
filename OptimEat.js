@@ -295,44 +295,7 @@ document.getElementById('logoutButton').addEventListener('click', function() {
 });
 
 
-    // Récupération de la modale et du bouton de fermeture
-const rowModal = document.getElementById("rowModal");
-const closeBtn = document.getElementsByClassName("close")[0];
-
-// Affichage de la modale lorsque vous cliquez sur une ligne
-document.getElementById('sheetTable').addEventListener('click', function(event) {
-    // Si l'élément cliqué est le bouton "X" ou se trouve dans la colonne du bouton "X", ne rien faire
-    if (event.target.classList.contains('delete-btn') || event.target.closest('td').classList.contains('delete-column')) {
-        return;
-    }
-
-    const tr = event.target.closest('tr');
-    if (tr) {
-        const rowData = document.getElementById('rowData');
-        rowData.innerHTML = ''; // Vider le contenu précédent
-        const titles = ["Recette:", "Ingrédients:", "Source:", "Page:"];
-        Array.from(tr.children).forEach((td, index) => {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${titles[index]}</strong> ${td.textContent}`;
-            rowData.appendChild(li);
-        });
-        rowModal.style.display = "block";
-    }
-});
-
-
-// Fermeture de la modale lorsque vous cliquez sur le bouton "x"
-closeBtn.onclick = function() {
-    rowModal.style.display = "none";
-}
-
-// Fermeture de la modale lorsque vous cliquez en dehors de celle-ci
-window.onclick = function(event) {
-    if (event.target == rowModal) {
-        rowModal.style.display = "none";
-    }
-}
-
+ 
 
     document.querySelector('#searchButton').addEventListener('click', function() {
         handleUserInput();
@@ -366,7 +329,18 @@ window.onclick = function(event) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const closeButtons = document.getElementsByClassName("close");
 
+    for (let btn of closeButtons) {
+        btn.addEventListener('click', function() {
+            const modal = btn.closest('.modal');
+            if (modal) {
+                modal.style.display = "none";
+            }
+        });
+    }
+});
 
 
     // Écouteur d'événements pour le formulaire de recette
@@ -436,6 +410,7 @@ document.addEventListener('click', function(e) {
         };
     }
 });
+
 
 
 
