@@ -230,10 +230,6 @@ function afficherRecetteDansTableau(recette, docId) {
     // Créez une nouvelle ligne pour la recette
     const tr = document.createElement('tr');
 
-    console.log("Setting docId for tr:", docId);
-    tr.setAttribute('data-id', docId);
-    console.log("After setting data-id:", tr.getAttribute('data-id'));
-
     // Remplissez la ligne avec les données de la recette
     ["Recette", "Ingrédients", "Source", "Page"].forEach(key => {
         const td = document.createElement('td');
@@ -242,12 +238,16 @@ function afficherRecetteDansTableau(recette, docId) {
     });
 
     // Stockez l'ID du document dans un attribut data-id de la ligne
-    console.log("Setting docId for tr:", docId);   
     tr.setAttribute('data-id', docId);
 
     // Ajoutez cette ligne au tableau
     const table = document.getElementById('sheetTable');
-    table.appendChild(tr);
+    const tbody = table.querySelector('tbody');  // Assurez-vous que votre tableau a un élément tbody
+    if (tbody.firstChild) {
+        tbody.insertBefore(tr, tbody.firstChild);  // Insérez la nouvelle ligne au début du tbody
+    } else {
+        tbody.appendChild(tr);  // Si le tbody est vide, ajoutez simplement la nouvelle ligne
+    }
 }
 
 
