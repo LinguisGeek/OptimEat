@@ -120,7 +120,7 @@ h2, h3 {
 }
 
 .highlighted-ingredient {
-    background-color: #1E90FF; /* Bleu électrique */
+    background-color: #F2BAC9; /* Bleu électrique */
     color: #FFFFFF; /* Texte blanc pour le contraste */
     padding: 2px 5px; /* Un peu d'espacement autour du texte */
     border-radius: 3px; /* Coins arrondis pour un look moderne */
@@ -217,7 +217,7 @@ tr:nth-child(even) {
 
 /* Bouton de déconnexion */
 #logoutButton {
-    background-color: #FF4D4D; /* Couleur de fond rouge pour indiquer une action de déconnexion */
+    background-color: #D34E24; /* Couleur de fond rouge pour indiquer une action de déconnexion */
     border: none;
     color: white; /* Texte blanc */
     padding: 10px 20px; /* Espacement interne pour le bouton */
@@ -293,7 +293,7 @@ body {
 }
 
 .recipe-title {
-    background-color: #4CAF50;
+    background-color: #00916E;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
@@ -383,7 +383,7 @@ form input[type="submit"]:hover {
 }
 
 #cancelDelete {
-    background-color: #FF4D4D;
+    background-color: #D34E24;
     color: white;
     /* ... autres propriétés ... */
 }
@@ -393,7 +393,7 @@ form input[type="submit"]:hover {
 }
 
 #confirmDelete {
-    background-color: #4CAF50;
+    background-color: #00916E;
     color: white;
     /* ... autres propriétés ... */
 }
@@ -459,9 +459,4 @@ form input[type="submit"]:hover {
     }
 }
 
-.highlighted-ingredient {
-    background-color: yellow;
-    padding: 2px 4px;
-    border-radius: 3px;
-}
 
