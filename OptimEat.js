@@ -104,20 +104,19 @@ function refreshDisplay() {
     }
 
    function fetchFirestoreData() {
-    const db = firebase.firestore();
-    db.collection("recipes").get().then((querySnapshot) => {
-        allData = [];
-        querySnapshot.forEach((doc) => {
-            let docData = doc.data();
-            docData.id = doc.id;  // Ajoutez cette ligne pour stocker l'ID du document avec les données
-            console.log("Doc ID:", doc.id);  // Affichez l'ID du document dans la console
-            allData.push(docData);
+    return db.collection("recipes").get()
+        .then((querySnapshot) => {
+            allData = [];
+            querySnapshot.forEach((doc) => {
+                let docData = doc.data();
+                docData.id = doc.id;
+                allData.push(docData);
+            });
+            displaySheetData(allData);
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération des données :", error);
         });
-        displaySheetData(allData);
-    })
-    .catch(error => {
-        console.error("Erreur lors de la récupération des données :", error);
-    });
 }
 
     function displaySheetData(data) {
@@ -191,14 +190,14 @@ table.appendChild(tbody);
     }
 
 function ajouterRecette(recette) {
-  db.collection("recipes").add(recette)
-    .then((docRef) => {
-      console.log("Document écrit avec l'ID: ", docRef.id);
-      // Supprimez l'appel à afficherRecetteDansTableau ici
-    })
-    .catch((error) => {
-      console.error("Erreur d'ajout de document: ", error);
-    });
+    return db.collection("recipes").add(recette)
+        .then((docRef) => {
+            console.log("Document écrit avec l'ID: ", docRef.id);
+            fetchFirestoreData();  // ou refreshDisplay();
+        })
+        .catch((error) => {
+            console.error("Erreur d'ajout de document: ", error);
+        });
 }
 
 db.collection("recipes").onSnapshot((snapshot) => { 
@@ -254,13 +253,14 @@ function afficherRecetteDansTableau(recette, docId) {
 
 
 function supprimerRecette(docId, trElement) {
-    db.collection('recipes').doc(docId).delete().then(() => {
-        console.log("Recette supprimée avec succès !");
-        // Supprimez la ligne du tableau
-        trElement.parentElement.parentElement.remove(); 
-    }).catch((error) => {
-        console.error("Erreur lors de la suppression de la recette: ", error);
-    });
+    return db.collection('recipes').doc(docId).delete()
+        .then(() => {
+            console.log("Recette supprimée avec succès !");
+            trElement.parentElement.parentElement.remove();
+        })
+        .catch((error) => {
+            console.error("Erreur lors de la suppression de la recette: ", error);
+        });
 }
 
  let searchTerms = [];
@@ -369,23 +369,29 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         // Ajout de la nouvelle recette à Firestore
-        ajouterRecette(newRecipe);
+        ajouterRecette(newRecipe)
+                .then(() => {
+                    document.getElementById('recipeModalContainer').style.display = "none";
+                    event.target.reset();
+                });
+        });
+    }
 
         // Fermeture de la modale et réinitialisation du formulaire
         document.getElementById('recipeModalContainer').style.display = "none";
         event.target.reset();
     });
 
-    } //End of if (getElementById('recipeForm'))
+//End of if (getElementById('recipeForm'))
 
 document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('delete-btn')) {
-        const btn = e.target;
-        const docId = btn.getAttribute('data-id');
+        if (e.target.classList.contains('delete-btn')) {
+            const btn = e.target;
+            const docId = btn.getAttribute('data-id');
+            const deleteModal = document.getElementById('deleteConfirmationModal');
+            deleteModal.style.display = "block";
         
-        // Affichez le modal
-        const deleteModal = document.getElementById('deleteConfirmationModal');
-        deleteModal.style.display = "block";
+
 
         // Écoutez l'événement de confirmation
         document.getElementById('confirmDelete').onclick = function() {
@@ -412,10 +418,6 @@ document.addEventListener('click', function(e) {
 });
 
 
-
-
-
-
 var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
 if (/windows phone/i.test(userAgent)) {
@@ -436,4 +438,4 @@ if (/android/i.test(userAgent)) {
 }
 
     fetchFirestoreData();
-}); //End of DOMCOntentLoaded
+ //End of DOMCOntentLoaded
