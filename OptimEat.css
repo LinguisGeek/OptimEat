@@ -408,59 +408,58 @@ form input[type="submit"]:hover {
 
 /* Styles spécifiques pour les appareils Android */
 .android-device {
-    font-size: 18px; /* Augmentation de la taille de police de base */
+    font-size: 1rem; /* 1rem est généralement égal à 16px */
 
     h1 {
-        font-size: 28px;
-        padding: 15px 10px;
+        font-size: 1.75rem;
+        padding: 0.9375rem 0.625rem; /* 15px / 16, 10px / 16 */
     }
 
     h2, h3 {
-        font-size: 24px;
-        padding: 10px;
+        font-size: 1.5rem;
+        padding: 0.625rem; /* 10px / 16 */
     }
 
     .search-bar-container {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem; /* 10px / 16 */
     }
 
     #searchInput {
         width: 100%;
         margin: 0;
-        padding: 10px; /* Augmentation du padding pour un meilleur toucher */
-        font-size: 20px; /* Augmentation de la taille de police */
+        padding: 0.625rem; /* 10px / 16 */
+        font-size: 1.25rem; /* 20px / 16 */
     }
 
     #searchButton {
-        padding: 10px 20px; /* Augmentation du padding pour un meilleur toucher */
-        font-size: 20px; /* Augmentation de la taille de police */
+        padding: 0.625rem 1.25rem; /* 10px / 16, 20px / 16 */
+        font-size: 1.25rem; /* 20px / 16 */
     }
 
     #savedIngredients {
-        margin: 15px;
-        font-size: 20px; /* Augmentation de la taille de police */
+        margin: 0.9375rem; /* 15px / 16 */
+        font-size: 1.25rem; /* 20px / 16 */
     }
 
     .table-container {
         max-width: 100%;
-        padding: 15px;
+        padding: 0.9375rem; /* 15px / 16 */
+        box-sizing: border-box;
     }
 
     .ingredients-list {
         columns: 1;
-        font-size: 20px; /* Augmentation de la taille de police */
+        font-size: 1.25rem; /* 20px / 16 */
     }
 
     .recipe-modal-content {
-        width: 0%;
+        width: 90%;
     }
 
     form input[type="text"] {
-        margin-bottom: 15px;
-        padding: 10px; /* Augmentation du padding pour un meilleur toucher */
-        font-size: 20px; /* Augmentation de la taille de police */
+        margin-bottom: 0.9375rem; /* 15px / 16 */
+        padding: 0.625rem; /* 10px / 16 */
+        font-size: 1.25rem; /* 20px / 16 */
     }
 }
-
-
